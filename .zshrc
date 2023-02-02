@@ -123,7 +123,7 @@ fi
 # Replace cat with bat
 if [ "$(command -v bat)" ]; then
     unalias -m 'cat'
-    alias cat='bat -pp --theme="Nord"'
+    alias cat='bat -pp --theme="gruvbox-dark"'
 fi
 
 # Starship

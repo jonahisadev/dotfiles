@@ -23,6 +23,7 @@ settings:
     global: dark
   content.geolocation:
     https://www.foxsports.com: false
+    https://www.geolocation.com: false
   content.notifications.enabled:
     https://dnschecker.org: false
     https://www.facebook.com: false

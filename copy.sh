@@ -7,7 +7,6 @@
 
 TO_CREATE=(
   ".config"
-  ".local/share"
   ".local/share/qutebrowser"
   "scripts"
 )
