@@ -37,6 +37,7 @@ FILES=(
 )
 
 for x in ${TO_CREATE[@]}; do
+  rm -r ./${x}
   mkdir -p ./${x}/
 done
 
