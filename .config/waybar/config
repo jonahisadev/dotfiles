@@ -1,0 +1,28 @@
+{
+  "position": "bottom",
+  "spacing": 4,
+  "modules-left": ["sway/workspaces", "sway/mode"],
+  "modules-right": [ "cpu", "custom/separator", "memory", "custom/separator", "clock"],
+
+  "sway/mode": {
+    "format": "<span style=\"italic\">{}</span>"
+  },
+
+  "cpu": {
+    "format": "<span color=\"#689d6a\">CPU</span> {usage}%"
+  },
+
+  "memory": {
+    "format": "<span color=\"#689d6a\">MEM</span> {percentage}%"
+  },
+
+  "clock": {
+    "format": "{:%b %d %I:%M %p}",
+    "timezone": "America/Chicago"
+  },
+  
+  "custom/separator": {
+    "format": "|"
+  }
+}
+# vim: ft=json

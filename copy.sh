@@ -2,37 +2,34 @@
 
 # This is the script I use to specify which dot files I want to
 # include in the git repo. This directory does not exist in $HOME.
-# I use `scripts` for miscellaneous scripts that I either run from
+# I use `.scripts` for miscellaneous scripts that I either run from
 # my window manager or from cron jobs.
 
 TO_CREATE=(
   ".config"
   ".local/share/qutebrowser"
-  "scripts"
+  ".scripts"
 )
 
 DIRS=(
   ".config/alacritty"
-  ".config/i3"
-  ".config/dunst"
   ".config/nvim"
-  ".config/picom"
-  ".config/polybar"
   ".config/qutebrowser"
-  ".config/rofi"
+  ".config/fuzzel"
+  ".config/sway"
+  ".config/waybar"
   ".local/share/qutebrowser/userscripts"
+  ".scripts/routes"
+  ".scripts/updates"
 )
 
 FILES=(
-  "scripts/hide_cursor.sh"
-  "scripts/qutempv.sh"
-  "scripts/redshift.sh"
-  "scripts/update.sh"
-  "scripts/updater.sh"
-  "scripts/update_count.sh"
-  ".config/starship.toml"
+  ".scripts/hide_cursor.sh"
+  ".scripts/qutempv.sh"
+  ".scripts/gammastep.sh"
   ".zshrc"
   ".tmux.conf"
+  "jonah.zsh-theme"
 )
 
 for x in ${TO_CREATE[@]}; do

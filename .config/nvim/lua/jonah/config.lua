@@ -16,6 +16,9 @@ vim.opt.wrap = false
 vim.opt.colorcolumn = "80"
 vim.opt.updatetime = 50
 
+-- Better popup options
+vim.opt.pumheight = 16
+
 -- Auto prettier
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = {"*.js", "*.ts", "*.tsx", "*.jsx", "*.vue"},
@@ -24,7 +27,17 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end
 })
 
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = {"*.cpp", "*.hpp", "*.h"},
+  callback = function(ev)
+    vim.lsp.buf.format()
+  end
+})
+
 -- Highlight yanks
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   command = 'silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}'
 })
+
+-- Better letters for choosewin
+vim.g.choosewin_label = 'ADWBCEFGHIJKLMNOPQRTUVYZ'

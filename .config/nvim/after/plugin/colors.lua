@@ -1,6 +1,10 @@
 function ColorMyStuff(color)
 	require('gruvbox').setup({
-		italic=false,
+		italic={
+			strings=false,
+			operators=false,
+			comments=true
+		},
     transparent_mode=true
 	})
 

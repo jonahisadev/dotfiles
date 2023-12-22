@@ -6,7 +6,7 @@ return require('packer').startup(function(use)
 
   -- Fuzzy finder
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    'nvim-telescope/telescope.nvim', tag = '0.1.3',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
@@ -92,7 +92,10 @@ return require('packer').startup(function(use)
   use('sbdchd/neoformat')
 
   -- Line indentation
-  use('lukas-reineke/indent-blankline.nvim')
+  use({
+    'lukas-reineke/indent-blankline.nvim',
+    tag = 'v2.20.8'
+  })
 
   -- Notifications
   use('rcarriga/nvim-notify')
@@ -120,4 +123,7 @@ return require('packer').startup(function(use)
     'folke/todo-comments.nvim',
     requires = 'nvim-lua/plenary.nvim',
   })
+
+  -- Java Language Server
+  use 'mfussenegger/nvim-jdtls'
 end)
