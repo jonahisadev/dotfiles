@@ -77,11 +77,11 @@ if [ -f "$TOKEN_CACHE" ]; then
   bw unlock --check --session "$TOKEN" | rg 'unlocked' >> /dev/null
   UNLOCKED=$(echo $?)
   if [ $UNLOCKED -ne 0 ]; then
-    TOKEN=$(bw unlock $(rofi -dmenu -l 0 -password -p "Master password: ") --raw)
+    TOKEN=$(bw unlock $(fuzzel --dmenu -l 0 --password -p "Master password: ") --raw)
     echo "$TOKEN" > "$TOKEN_CACHE"
   fi
 else
-  TOKEN=$(bw unlock $(rofi -dmenu -l 0 -password -p "Master password: ") --raw)
+  TOKEN=$(bw unlock $(fuzzel --dmenu -l 0 --password -p "Master password: ") --raw)
   echo "$TOKEN" > "$TOKEN_CACHE"
 fi
 
@@ -93,6 +93,7 @@ fi
 # Get username/password pair
 if [ -n "$TOKEN" ]; then
   # Fetch from API
+  bw sync
   CACHE=$(bw list items --url="$URL" --session="$TOKEN")
 
   # Get the username we want
@@ -103,7 +104,7 @@ if [ -n "$TOKEN" ]; then
     echo "message-error 'No entry found for $URL'" >> "$QUTE_FIFO"
     exit 1
   else
-    USERNAME=$(echo $CACHE | jq -r '.[] | .login.username' | rofi -dmenu -p "Select Entry: ")
+    USERNAME=$(echo $CACHE | jq -r '.[] | .login.username' | fuzzel --dmenu -p "Select Entry: ")
   fi
 
   # Get the password we want
@@ -111,7 +112,7 @@ if [ -n "$TOKEN" ]; then
 
   # Do something with the credentials
   if [ "$PASS_ONLY" = true ]; then
-    echo -ne $PASSWORD | xclip -in -selection clipboard
+    echo -ne $PASSWORD | wl-copy
     echo "message-info 'Pasted password into clipboard'" >> "$QUTE_FIFO"
   else
     printjs() {

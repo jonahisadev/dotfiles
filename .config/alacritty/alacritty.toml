@@ -1,0 +1,57 @@
+
+# [colors.bright]
+# black = "0x928374"
+# blue = "0x7daea3"
+# cyan = "0x89b482"
+# green = "0xa9b665"
+# magenta = "0xd3869b"
+# red = "0xea6962"
+# white = "0xdfbf8e"
+# yellow = "0xfabd2f"
+#
+# [colors.normal]
+# black = "0x665c54"
+# blue = "0x7daea3"
+# cyan = "0x89b482"
+# green = "0xa9b665"
+# magenta = "0xd3869b"
+# red = "0xea6962"
+# white = "0xdfbf8e"
+# yellow = "0xd79921"
+#
+# [colors.primary]
+# background = "0x282828"
+# foreground = "0xdfbf8e"
+
+[cursor]
+blink_interval = 500
+unfocused_hollow = true
+
+[cursor.style]
+blinking = "On"
+
+[font.bold]
+style = "Bold"
+
+[font.italic]
+style = "Italic"
+
+[font.normal]
+family = "Roboto Mono for Powerline"
+style = "Regular"
+
+[scrolling]
+history = 10000
+
+[window]
+dynamic_title = true
+opacity = 0.99
+
+[window.dimensions]
+columns = 80
+lines = 24
+
+[general]
+import = [
+  "~/.config/alacritty/catppuccin-mocha.toml"
+]

@@ -22,12 +22,17 @@ settings:
   colors.webpage.preferred_color_scheme:
     global: dark
   content.geolocation:
+    https://careers.mastercard.com: false
     https://www.foxsports.com: false
     https://www.geolocation.com: false
     https://www.google.com: false
+    https://www.speedtest.net: false
   content.notifications.enabled:
+    http://0.0.0.0:8025: true
     https://calendar.google.com: false
     https://dnschecker.org: false
+    https://gzeao.check-tl-ver-24-2.com: false
+    https://thepiratebay.org: false
     https://www.facebook.com: false
     https://www.reddit.com: false
     https://www.youtube.com: false

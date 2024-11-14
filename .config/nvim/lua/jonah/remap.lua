@@ -33,3 +33,7 @@ vim.keymap.set('n', '<leader>ft', '<cmd>TodoTelescope<cr>')
 vim.keymap.set('n', '<leader>ll', function()
   vim.lsp.buf.code_action()
 end)
+
+-- Copy to system
+vim.keymap.set({'n', 'v'}, '<leader>y', '"+y')
+vim.keymap.set({'n', 'v'}, '<leader>yy', '"+yy')

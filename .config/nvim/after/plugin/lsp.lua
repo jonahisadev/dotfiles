@@ -4,7 +4,7 @@ lsp.preset('recommended')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = { 'tsserver', 'eslint', 'rust_analyzer', 'clangd' },
+  ensure_installed = { 'tsserver', 'eslint', 'rust_analyzer', 'clangd', 'phpactor' },
   handlers = {
     lsp.default_setup
   }
@@ -32,14 +32,16 @@ lsp.set_preferences({
   sign_icons = {}
 })
 
-lsp.on_attach(function(client, bufnr)
+function on_attach(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
 
   vim.keymap.set('n', '<leader>gd', function() vim.lsp.buf.definition() end, opts)
   vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
   vim.keymap.set('n', '<leader>sd', function() vim.diagnostic.open_float() end, opts)
   vim.keymap.set('n', '<leader>sr', function() vim.lsp.buf.rename() end, opts)
-end)
+end
+
+lsp.on_attach(on_attach)
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -55,3 +57,10 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 lsp.setup()
+
+require('lspconfig').phpactor.setup({
+  on_attach = on_attach,
+  init_options = {
+    ["language_server_phpstan.enabled"] = true
+  }
+})

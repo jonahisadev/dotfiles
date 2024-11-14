@@ -1,11 +1,14 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:/usr/local/bin:$HOME/go/bin:$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.local/bin:/usr/local/bin:$HOME/go/bin:$HOME/.cargo/bin:/home/jonah/.local/share/gem/ruby/3.0.0/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 # Env variables I like
 export MANPAGER="nvim +Man! --cmd 'let g:loaded_persisted=1'"
+
+# Neovim!!
+export EDITOR=nvim
 
 # Theme
 ZSH_THEME="jonah" # set by `omz`
@@ -41,7 +44,7 @@ fi
 # Replace cat with bat
 if [ "$(command -v bat)" ]; then
     unalias -m 'cat'
-    alias cat='bat -pp --theme="gruvbox-dark"'
+    alias cat='bat -pp --theme="Catppuccin-mocha"'
 fi 
 
 # Deno
@@ -50,3 +53,14 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 
 # ASDF version manager
 . /opt/asdf-vm/asdf.sh
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+source ~/.rvm/scripts/rvm
+
+# GPG
+GPG_TTY=$(tty)
+export GPG_TTY
+
+# Turso
+export PATH="$PATH:/home/jonah/.turso"

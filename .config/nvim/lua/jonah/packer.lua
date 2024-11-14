@@ -11,7 +11,8 @@ return require('packer').startup(function(use)
   }
 
   -- Color theme
-  use('ellisonleao/gruvbox.nvim')
+  -- use('ellisonleao/gruvbox.nvim')
+  use({ 'catppuccin/nvim', as = 'catppuccin' })
 
   -- Syntax highlighting
   use('nvim-treesitter/nvim-treesitter', {run = 'TSUpdate'})

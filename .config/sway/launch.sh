@@ -4,12 +4,13 @@
 export WLR_NO_HARDWARE_CURSORS=1
 export WLR_RENDERER=vulkan
 
-export SDL_VIDEODRIVER=wayland
+export SDL_VIDEODRIVER=x11
 export _JAVA_AWT_WM_NONREPARENTING=1
 export QT_QPA_PLATFORM=wayland
 export XDG_CURRENT_DESKTOP=sway
 export XDG_SESSION_DESKTOP=sway
-export XDG_RUNTIME_DIR=/tmp/1000
+export XDG_SESSION_TYPE=wayland
+export XDG_RUNTIME_DIR=/run/user/1000
 export MOZ_WAYLAND=1
 export MOZ_ENABLE_WAYLAND=1
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
@@ -23,4 +24,7 @@ export GBM_BACKEND=nvidia-drm
 #export QT_QPA_PLATFORMTHEME=qt5ct
 
 mkdir -p /tmp/1000 && chown -R jonah /tmp/1000
-sway --unsupported-gpu
+
+systemctl --user import-environment XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP XDG_SESSION_TYPE
+
+dbus-run-session sway --unsupported-gpu

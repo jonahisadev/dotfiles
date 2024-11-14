@@ -1,17 +1,21 @@
 function ColorMyStuff(color)
-	require('gruvbox').setup({
-		italic={
-			strings=false,
-			operators=false,
-			comments=true
-		},
-    transparent_mode=true
-	})
+  require('catppuccin').setup({
+    background = {
+      light = "latte",
+      dark = "mocha"
+    },
+    transparent_background = true,
+    show_end_of_buffer = true,
+    integrations = {
+      cmp = true,
+      mason = true,
+      neotree = true,
+      treesitter = true,
+      notify = true
+    }
+  })
 
-	color = color or 'gruvbox'
-  vim.o.background = "dark"
-	vim.cmd.colorscheme(color)
-
+  vim.cmd.colorscheme('catppuccin-mocha')
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end

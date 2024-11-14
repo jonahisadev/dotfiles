@@ -1,15 +1,14 @@
-@define-color text #ebdbb2;
-@define-color text-dim #a89984;
-@define-color text-dark #3c3836;
-@define-color green #689d6a;
+@define-color text #cdd6f4;
+@define-color text-dim #bac2de;
+@define-color text-dark #313244;
+@define-color blue #89b4fa;
 
 * {
   font-family: FontAwesome, Roboto Mono for Powerline, sans-serif;
 }
 
 window#waybar {
-  background-color: rgba(16, 16, 16, 0.99);
-  border-bottom: 2px solid rgba(32,32,32,0.95);
+  background-color: rgba(17, 17, 27, 0.99);
   color: @text;
 }
 
@@ -21,7 +20,7 @@ window#waybar {
 }
 
 #workspaces button.focused {
-  background-color: @green;
+  background-color: @blue;
   color: @text-dark;
   border-bottom: 4px solid @text;
 }
@@ -30,8 +29,8 @@ window#waybar {
   margin: 0 4px;
 }
 
-window.green {
-  color: @green;
+window.blue {
+  color: @blue;
 }
 
 #cpu, #memory, #clock {

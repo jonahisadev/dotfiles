@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = {"*.cpp", "*.hpp", "*.h"},
+  pattern = {"*.cpp", "*.hpp", "*.c", "*.h", "*.rs"},
   callback = function(ev)
     vim.lsp.buf.format()
   end

@@ -9,11 +9,11 @@
   },
 
   "cpu": {
-    "format": "<span color=\"#689d6a\">CPU</span> {usage}%"
+    "format": "<span color=\"#89b4fa\">CPU</span> {usage}%"
   },
 
   "memory": {
-    "format": "<span color=\"#689d6a\">MEM</span> {percentage}%"
+    "format": "<span color=\"#89b4fa\">MEM</span> {percentage}%"
   },
 
   "clock": {

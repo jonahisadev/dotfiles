@@ -37,3 +37,32 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end
 })
 
+-- Complete a task
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = { "*.md", "*.txt" },
+  callback = function(ev)
+    vim.api.nvim_buf_create_user_command(
+      0,
+      'TaskComplete',
+      function(opts)
+        local line = vim.api.nvim_buf_get_lines(0, opts.line1 - 1, opts.line1, false)[1]
+        local idx = string.find(line, '%[ %]')
+
+        -- Check off item
+        vim.api.nvim_buf_set_text(0, opts.line1 - 1, idx, opts.line1 - 1, idx + 1, {'x'})
+
+        -- Place completed at the end
+        local timeFmt = os.date("%b %d, %Y - %I:%M %p")
+        vim.api.nvim_buf_set_text(
+          0,
+          opts.line1 - 1,
+          string.len(line),
+          opts.line1 - 1,
+          string.len(line),
+          { '\t\t@completed(' .. timeFmt .. ')' }
+        )
+      end,
+      { nargs = 0, range = true }
+    )
+  end
+})

@@ -23,7 +23,7 @@ set $menu fuzzel -w 100 | xargs swaymsg exec --
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/jonah/Pictures/wallpaper2.jpg fill
+output * bg /home/jonah/Pictures/evening-sky.png fill
 #
 # Example configuration:
 #
@@ -177,6 +177,16 @@ seat * hide_cursor 3000
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
+
+#
+# Screenshots
+#
+    # Screenshot area
+    bindsym $mod+Ctrl+Shift+4 exec grimshot save area
+
+    # Screenshot entire screen
+    bindsym $mod+Ctrl+Shift+3 exec grimshot save screen
+
 #
 # Resizing containers:
 #
@@ -202,7 +212,8 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-client.focused #008f53 #008f53 #FFFFFF #008f53 #008f53
+client.unfocused #6c7086 #6c7086 #FFFFFF #6c7086 #6c7086
+client.focused #b4befe #b4befe #FFFFFF #b4befe #b4befe
 
 for_window [class="^.*"] border pixel 2
 bindsym $mod+Shift+f [floating] exec i3-msg border pixel 1
@@ -234,6 +245,9 @@ for_window [app_id="org.gnome.Calculator"] floating enable
 
 exec_always --no-startup-id $HOME/.scripts/gammastep.sh
 exec_always --no-startup-id /usr/bin/dunst
+exec_always --no-startup-id pulseaudio --daemonize
+exec_always --no-startup-id /usr/lib/xdg-desktop-portal -r
+exec_always --no-startup-id pipewire
 
 exec swayidle -w \
 	timeout 3600 'swaylock -f -c 161616' \
