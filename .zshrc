@@ -10,6 +10,12 @@ export MANPAGER="nvim +Man! --cmd 'let g:loaded_persisted=1'"
 # Neovim!!
 export EDITOR=nvim
 
+# Titles
+DISABLE_AUTO_TITLE="true"
+function set_terminal_title() {
+  echo -en "zsh"
+}
+
 # Theme
 ZSH_THEME="jonah" # set by `omz`
 
@@ -64,3 +70,6 @@ export GPG_TTY
 
 # Turso
 export PATH="$PATH:/home/jonah/.turso"
+
+# PWD
+export PATH="$PATH:/home/jonah/Dev/pwd/.build"

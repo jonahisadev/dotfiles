@@ -26,12 +26,16 @@ settings:
     https://www.foxsports.com: false
     https://www.geolocation.com: false
     https://www.google.com: false
+    https://www.homedepot.com: false
     https://www.speedtest.net: false
+  content.javascript.clipboard:
+    https://github.com: access-paste
   content.notifications.enabled:
     http://0.0.0.0:8025: true
     https://calendar.google.com: false
     https://dnschecker.org: false
     https://gzeao.check-tl-ver-24-2.com: false
+    https://plantuml.com: false
     https://thepiratebay.org: false
     https://www.facebook.com: false
     https://www.reddit.com: false
@@ -42,12 +46,12 @@ settings:
   fonts.default_family:
     global: '"Roboto Mono for Powerline"'
   url.default_page:
-    global: https://google.com
+    global: https://kagi.com
   url.searchengines:
     global:
-      DEFAULT: https://google.com/search?q={}
+      DEFAULT: https://kagi.com/search?q={}
   url.start_pages:
-    global: https://getpocket.com/explore?src=navbar
+    global: https://kagi.com
   url.yank_ignored_parameters:
     global:
     - ref

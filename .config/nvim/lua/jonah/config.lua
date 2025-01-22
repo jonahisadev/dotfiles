@@ -34,6 +34,14 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end
 })
 
+-- Auto PlantUML
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  pattern = { "*.puml", "*.plantuml" },
+  callback = function(ev)
+    vim.fn.jobstart('plantuml ' .. ev.file)
+  end
+})
+
 -- Highlight yanks
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   command = 'silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}'

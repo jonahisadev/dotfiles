@@ -66,3 +66,20 @@ vim.api.nvim_create_autocmd('BufEnter', {
     )
   end
 })
+
+-- Open PlantUML image
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = { "*.puml", "*.plantuml" },
+  callback = function(ev)
+    vim.api.nvim_buf_create_user_command(
+      0,
+      'PlantOpen',
+      function(opts)
+        local path = ev.file
+        local filename, _ = path:match("^.+/(.+)%.(.+)$")
+        vim.fn.jobstart('imv ' .. filename .. '.png')
+      end,
+      { nargs = 0 }
+    )
+  end
+})

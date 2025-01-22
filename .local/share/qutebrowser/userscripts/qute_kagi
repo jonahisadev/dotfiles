@@ -1,0 +1,19 @@
+#!/bin/bash
+
+private() {
+  echo "message-error 'Private not implemented yet'"
+  exit 1
+}
+
+summarize() {
+  echo "open -t !summ $QUTE_URL" >> "$QUTE_FIFO"
+}
+
+case "$1" in
+  private) private ;;
+  sum) summarize ;;
+  *)
+    echo "message-error 'Invalid command to kagi script'" >> "$QUTE_FIFO"
+    exit 1
+    ;;
+esac

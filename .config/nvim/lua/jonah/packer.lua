@@ -29,6 +29,9 @@ return require('packer').startup(function(use)
     }
   }
 
+  -- More language support
+  use ('sheerun/vim-polyglot')
+
   -- Choose window
   use('t9md/vim-choosewin')
 

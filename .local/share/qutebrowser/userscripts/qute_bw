@@ -3,69 +3,15 @@
 # Set up some things
 TOKEN_TMPDIR="${TMPDIR:-/tmp}"
 TOKEN_CACHE="$TOKEN_TMPDIR/bw.token"
+USER_ONLY=false
+PASS_ONLY=false
 
+# Sometimes we just want one thing
 if [ "$1" = "pass-only" ]; then
   PASS_ONLY=true
-else
-  PASS_ONLY=false
+elif [ "$1" = "user-only" ]; then
+  USER_ONLY=true
 fi
-
-# JavaScript
-javascript_escape() {
-  sed "s,[\\\\'\"\/],\\\\&,g" <<< "$1"
-}
-
-js() {
-cat <<EOF
-    function isVisible(elem) {
-        var style = elem.ownerDocument.defaultView.getComputedStyle(elem, null);
-        if (style.getPropertyValue("visibility") !== "visible" ||
-            style.getPropertyValue("display") === "none" ||
-            style.getPropertyValue("opacity") === "0") {
-            return false;
-        }
-        return elem.offsetWidth > 0 && elem.offsetHeight > 0;
-    };
-    function hasPasswordField(form) {
-        var inputs = form.getElementsByTagName("input");
-        for (var j = 0; j < inputs.length; j++) {
-            var input = inputs[j];
-            if (input.type == "password") {
-                return true;
-            }
-        }
-        return false;
-    };
-    function loadData2Form (form) {
-        var inputs = form.getElementsByTagName("input");
-        for (var j = 0; j < inputs.length; j++) {
-            var input = inputs[j];
-            if (isVisible(input) && (input.type == "text" || input.type == "email")) {
-                input.focus();
-                input.value = "$(javascript_escape "${USERNAME}")";
-                input.dispatchEvent(new Event('change'));
-                input.blur();
-            }
-            if (input.type == "password") {
-                input.focus();
-                input.value = "$(javascript_escape "${PASSWORD}")";
-                input.dispatchEvent(new Event('change'));
-                input.blur();
-            }
-        }
-    };
-    var forms = document.getElementsByTagName("form");
-    if("$(javascript_escape "${QUTE_URL}")" == window.location.href) {
-        for (i = 0; i < forms.length; i++) {
-            if (hasPasswordField(forms[i])) {
-              loadData2Form(forms[i]);
-            }
-        }
-    } else {
-        alert("Secrets will not be inserted.\nUrl of this page and the one where the user script was started differ.");
-    }
-EOF
-}
 
 # Parse out URL and log to the browser
 URL=$(echo "$QUTE_URL" | awk -F/ '{print $3}' | sed 's/www.//g')
@@ -92,32 +38,35 @@ fi
 
 # Get username/password pair
 if [ -n "$TOKEN" ]; then
+  echo "message-info ''"
   # Fetch from API
   bw sync
   CACHE=$(bw list items --url="$URL" --session="$TOKEN")
 
   # Get the username we want
-  COUNT=$(echo $CACHE | jq '. | length')
+  COUNT=$(echo "$CACHE" | jq '. | length')
   if [ $COUNT -eq 1 ]; then
-    USERNAME=$(echo $CACHE | jq -r '.[0].login.username')
+    USERNAME_ID=$(echo "$CACHE" | jq -r '.[0].login.id')
   elif [ $COUNT -eq 0 ]; then
     echo "message-error 'No entry found for $URL'" >> "$QUTE_FIFO"
     exit 1
   else
-    USERNAME=$(echo $CACHE | jq -r '.[] | .login.username' | fuzzel --dmenu -p "Select Entry: ")
+    index=$(echo "$CACHE" | jq -r '.[] | .name' | fuzzel --dmenu -p "Select Entry: " --index)
+    USERNAME_ID=$(echo "$CACHE" | jq --arg idx "$index" -r '.[$idx|tonumber].id')
   fi
 
   # Get the password we want
-  PASSWORD=$(echo $CACHE | jq --arg user "$USERNAME" -r '.[] | select(.login.username == $user) | .login.password')
+  PASSWORD=$(echo "$CACHE" | jq --arg id "$USERNAME_ID" -r '.[] | select(.id == $id) | .login.password')
+  USERNAME=$(echo "$CACHE" | jq --arg id "$USERNAME_ID" -r '.[] | select(.id == $id) | .login.username')
 
   # Do something with the credentials
   if [ "$PASS_ONLY" = true ]; then
-    echo -ne $PASSWORD | wl-copy
+    echo -ne "$PASSWORD" | wl-copy
     echo "message-info 'Pasted password into clipboard'" >> "$QUTE_FIFO"
+  elif [ "$USER_ONLY" = true ]; then
+    echo -ne "$USERNAME" | wl-copy
+    echo "message-info 'Pasted username into clipboard'" >> "$QUTE_FIFO"
   else
-    printjs() {
-      js | sed 's,//.*$,,' | tr '\n' ' '
-    }
-    echo "jseval -q $(printjs)" >> "$QUTE_FIFO"
+    echo "fake-key $USERNAME<tab>$PASSWORD" >> "$QUTE_FIFO"
   fi
 fi
