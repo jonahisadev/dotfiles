@@ -1,0 +1,11 @@
+include "themes/catppuccin-mocha.conf"
+
+font_family "Roboto Mono for Powerline"
+
+cursor_shape block
+cursor_shape_unfocused hollow
+cursor_blink_interval 0.5
+
+scrollback_lines 10000
+
+background_opacity 0.99

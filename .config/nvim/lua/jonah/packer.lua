@@ -11,7 +11,6 @@ return require('packer').startup(function(use)
   }
 
   -- Color theme
-  -- use('ellisonleao/gruvbox.nvim')
   use({ 'catppuccin/nvim', as = 'catppuccin' })
 
   -- Syntax highlighting
@@ -58,8 +57,8 @@ return require('packer').startup(function(use)
     }
   }
 
-  -- Get eslint to work with LSP
-  use('jose-elias-alvarez/null-ls.nvim')
+  -- null-ls
+  use('nvimtools/none-ls.nvim')
 
   -- Lualine
   use {

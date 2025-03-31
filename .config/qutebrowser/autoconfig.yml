@@ -23,13 +23,22 @@ settings:
     global: dark
   content.geolocation:
     https://careers.mastercard.com: false
+    https://membersecure.anthem.com: false
     https://www.foxsports.com: false
     https://www.geolocation.com: false
     https://www.google.com: false
+    https://www.guitarcenter.com: false
     https://www.homedepot.com: false
     https://www.speedtest.net: false
   content.javascript.clipboard:
+    https://app.zerossl.com: access-paste
+    https://asdf-vm.com: access-paste
+    https://console.neon.tech: access-paste
+    https://dash.cloudflare.com: access-paste
+    https://generateuuid.online: none
     https://github.com: access-paste
+    https://kagi.com: access-paste
+    https://portal.cloud.hashicorp.com: access-paste
   content.notifications.enabled:
     http://0.0.0.0:8025: true
     https://calendar.google.com: false

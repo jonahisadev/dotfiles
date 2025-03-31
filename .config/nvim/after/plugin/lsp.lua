@@ -4,7 +4,7 @@ lsp.preset('recommended')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = { 'tsserver', 'eslint', 'rust_analyzer', 'clangd', 'phpactor' },
+  ensure_installed = { 'eslint', 'rust_analyzer', 'clangd', 'phpactor' },
   handlers = {
     lsp.default_setup
   }

@@ -49,3 +49,10 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 
 -- Better letters for choosewin
 vim.g.choosewin_label = 'ADWBCEFGHIJKLMNOPQRTUVYZ'
+
+-- Prisma needs to load the right thing for treesitter
+vim.filetype.add({
+  pattern = {
+    ['*.prisma'] = 'prisma'
+  }
+})

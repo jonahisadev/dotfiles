@@ -10,8 +10,11 @@ export MANPAGER="nvim +Man! --cmd 'let g:loaded_persisted=1'"
 # Neovim!!
 export EDITOR=nvim
 
+# Dynamic libs from local lib
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH":/usr/local/lib
+
 # Titles
-DISABLE_AUTO_TITLE="true"
+export DISABLE_AUTO_TITLE="true"
 function set_terminal_title() {
   echo -en "zsh"
 }
@@ -58,7 +61,7 @@ export DENO_INSTALL="/home/jonah/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
 # ASDF version manager
-. /opt/asdf-vm/asdf.sh
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
@@ -73,3 +76,6 @@ export PATH="$PATH:/home/jonah/.turso"
 
 # PWD
 export PATH="$PATH:/home/jonah/Dev/pwd/.build"
+
+# P42
+export P42_LIB="/usr/local/lib/libykcs11.so"

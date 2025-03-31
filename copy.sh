@@ -12,21 +12,16 @@ TO_CREATE=(
 )
 
 DIRS=(
-  ".config/alacritty"
+  ".config/kitty"
   ".config/nvim"
   ".config/qutebrowser"
   ".config/fuzzel"
   ".config/sway"
   ".config/waybar"
   ".local/share/qutebrowser/userscripts"
-  ".scripts/routes"
-  ".scripts/updates"
 )
 
 FILES=(
-  ".scripts/hide_cursor.sh"
-  ".scripts/qutempv.sh"
-  ".scripts/gammastep.sh"
   ".zshrc"
   ".tmux.conf"
   "jonah.zsh-theme"
