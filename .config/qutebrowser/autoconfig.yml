@@ -10,8 +10,10 @@ settings:
     global:
       bw: spawn --userscript qute_bw
       bwp: spawn --userscript qute_bw pass-only
+      op: spawn --userscript qute_1pass_2
       q: close
       qa: quit
+      sum: spawn --userscript qute_kagi sum
       w: session-save
       wq: quit --save
       wqa: quit --save
@@ -38,6 +40,7 @@ settings:
     https://generateuuid.online: none
     https://github.com: access-paste
     https://kagi.com: access-paste
+    https://nextjs.org: access-paste
     https://portal.cloud.hashicorp.com: access-paste
   content.notifications.enabled:
     http://0.0.0.0:8025: true
@@ -52,6 +55,14 @@ settings:
   content.register_protocol_handler:
     https://calendar.google.com?cid=%25s: false
     https://mail.google.com?extsrc=mailto&url=%25s: true
+  editor.command:
+    global:
+    - kitty
+    - nvim
+    - -f
+    - '{file}'
+    - -c
+    - normal {line}G{column0}l
   fonts.default_family:
     global: '"Roboto Mono for Powerline"'
   url.default_page:

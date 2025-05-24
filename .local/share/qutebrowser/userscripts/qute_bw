@@ -38,7 +38,6 @@ fi
 
 # Get username/password pair
 if [ -n "$TOKEN" ]; then
-  echo "message-info ''"
   # Fetch from API
   bw sync
   CACHE=$(bw list items --url="$URL" --session="$TOKEN")
@@ -46,7 +45,7 @@ if [ -n "$TOKEN" ]; then
   # Get the username we want
   COUNT=$(echo "$CACHE" | jq '. | length')
   if [ $COUNT -eq 1 ]; then
-    USERNAME_ID=$(echo "$CACHE" | jq -r '.[0].login.id')
+    USERNAME_ID=$(echo "$CACHE" | jq -r '.[0].id')
   elif [ $COUNT -eq 0 ]; then
     echo "message-error 'No entry found for $URL'" >> "$QUTE_FIFO"
     exit 1
@@ -67,6 +66,7 @@ if [ -n "$TOKEN" ]; then
     echo -ne "$USERNAME" | wl-copy
     echo "message-info 'Pasted username into clipboard'" >> "$QUTE_FIFO"
   else
+    echo "message-info '$USERNAME'" >> "$QUTE_FIFO"
     echo "fake-key $USERNAME<tab>$PASSWORD" >> "$QUTE_FIFO"
   fi
 fi

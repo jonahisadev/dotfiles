@@ -13,6 +13,9 @@ export EDITOR=nvim
 # Dynamic libs from local lib
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH":/usr/local/lib
 
+# Screenshot directory
+export XDG_SCREENSHOTS_DIR="$HOME/Pictures/screenshots"
+
 # Titles
 export DISABLE_AUTO_TITLE="true"
 function set_terminal_title() {

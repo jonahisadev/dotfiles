@@ -21,18 +21,14 @@ vim.keymap.set('x', '<', '<gv')
 vim.keymap.set('x', '>', '>gv|')
 
 -- Show issues
-vim.keymap.set('n', '<leader>xx', '<cmd>TroubleToggle document_diagnostics<cr>')
+vim.keymap.set('n', '<leader>xx', '<cmd>Trouble diagnostics toggle focus=false<cr>')
+vim.keymap.set('n', '<leader>cs', '<cmd>Trouble symbols toggle pinned=true win.relative=win win.position=right<cr>')
 
 -- Choose window
-vim.keymap.set('n', '-', '<Plug>(choosewin)')
+vim.keymap.set('n', '-', '<cmd>ChooseWin<cr>')
 
 -- Show TODO in telescope
 vim.keymap.set('n', '<leader>ft', '<cmd>TodoTelescope<cr>')
-
--- Code Actions
-vim.keymap.set('n', '<leader>ll', function()
-  vim.lsp.buf.code_action()
-end)
 
 -- Copy to system
 vim.keymap.set({'n', 'v'}, '<leader>y', '"+y')

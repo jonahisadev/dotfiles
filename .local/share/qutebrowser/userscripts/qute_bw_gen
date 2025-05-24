@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Constants
+TOKEN_TMPDIR="${TMPDIR:-/tmp}"
+TOKEN_CACHE="$TOKEN_TMPDIR/bw.token"
+
+# Get username
+if [[ -z "$1" ]]; then
+  echo "message-error 'Provide username as script argument'" >> "$QUTE_FIFO"
+  exit 1
+fi
+
+# Get session token, or log in if missing/invalid
+if [ -f "$TOKEN_CACHE" ]; then
+  TOKEN=$(cat "$TOKEN_CACHE")
+  bw unlock --check --session "$TOKEN" | rg 'unlocked' >> /dev/null
+  UNLOCKED=$(echo $?)
+  if [ $UNLOCKED -ne 0 ]; then
+    TOKEN=$(bw unlock $(fuzzel --dmenu -l 0 --password -p "Master password: ") --raw)
+    echo "$TOKEN" > "$TOKEN_CACHE"
+  fi
+else
+  TOKEN=$(bw unlock $(fuzzel --dmenu -l 0 --password -p "Master password: ") --raw)
+  echo "$TOKEN" > "$TOKEN_CACHE"
+fi
+
+# Parse out hostname
+hostname=$(echo "$QUTE_URL" | cut -d '/' -f 3)
+
+# Generate password
+password=$(bw generate -ulns --length 24)
+username="$1"
+
+# Save login
+bw get template item --session="$TOKEN" \
+  | jq ".name=\"$hostname\" | .login=$(bw get template item.login --session $TOKEN | jq ".username=\"$username\" | .password=\"$password\" | .totp=null | .uris[0]={\"match\": null, \"uri\": \"$hostname\"}")" \
+  | bw encode --session="$TOKEN" \
+  | bw create item --session="$TOKEN"
+
+# Copy password
+echo "$password" | wl-copy
+
+# All done
+echo "message-info 'Saved login and copied password'" >> "$QUTE_FIFO"

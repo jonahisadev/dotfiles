@@ -32,7 +32,7 @@ return require('packer').startup(function(use)
   use ('sheerun/vim-polyglot')
 
   -- Choose window
-  use('t9md/vim-choosewin')
+  use ({'s1n7ax/nvim-window-picker', tag = 'v2.*'})
 
   -- LSP
   use {

@@ -83,3 +83,20 @@ vim.api.nvim_create_autocmd('BufEnter', {
     )
   end
 })
+
+-- Open window picker and then switch to the selected window
+vim.api.nvim_create_autocmd('BufEnter', {
+  callback = function(ev)
+    vim.api.nvim_buf_create_user_command(
+      0,
+      'ChooseWin',
+      function(opts)
+        local winid = require('window-picker').pick_window()
+        if winid ~= nil then
+          vim.api.nvim_set_current_win(winid)
+        end
+      end,
+      { nargs = 0 }
+    )
+  end
+})
