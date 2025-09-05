@@ -1,62 +1,67 @@
 -- Basic vim options
-vim.opt.number = true
-vim.opt.wrap = false
-vim.opt.swapfile = false
-vim.opt.signcolumn = "yes"
-vim.opt.winborder = "rounded"
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
-vim.opt.smartindent = true
-vim.opt.scrolloff = 8
-vim.opt.colorcolumn = "80"
-vim.opt.list = true
-vim.opt.listchars:append "space:⋅"
-vim.opt.showtabline = 2
-vim.g.mapleader = ';'
+vim.opt.number = true               -- Show line numbers
+vim.opt.wrap = false                -- Don't wrap lines
+vim.opt.swapfile = false            -- Don't save swap files
+vim.opt.signcolumn = "yes"          -- Always show the sign column
+vim.opt.winborder = "rounded"       -- Rounded window borders
+vim.opt.tabstop = 2                 -- Number of spaces tabs count for
+vim.opt.shiftwidth = 2              -- Size of an indent
+vim.opt.expandtab = true            -- Use spaces instead of tabs
+vim.opt.smartindent = true          -- Autoindent new lines
+vim.opt.scrolloff = 8               -- Minimum lines to keep above and below the cursor
+vim.opt.colorcolumn = "80"          -- Line length marker at 80 characters
+vim.opt.list = true                 -- Show whitespace characters
+vim.opt.listchars:append "space:⋅"  -- Show spaces as dots
+vim.opt.showtabline = 2             -- Always show the tab line
+vim.g.mapleader = ';'               -- Set leader key to ; (e.g. ;ff to find files)
 
 -- Keymaps
-vim.keymap.set('n', 'Q', 'q')
-vim.keymap.set('n', 'gQ', '@q')
-vim.keymap.set('n', 'q', ':quit<CR>')
-vim.keymap.set('x', '<', '<gv')
-vim.keymap.set('x', '>', '>gv|')
-vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y')
-vim.keymap.set({ 'n', 'v' }, '<leader>yy', '"+yy')
-vim.keymap.set('n', '<leader>ff', ':Pick files<CR>')
-vim.keymap.set('n', '<leader>fg', ':Pick grep_live<CR>')
-vim.keymap.set('n', '<leader>fb', ':Pick buffers<CR>')
+vim.keymap.set('n', 'Q', 'q')       -- Remap Q to q to avoid accidental Ex mode
+vim.keymap.set('n', 'gQ', '@q')     -- gQ to record macros to q register
+vim.keymap.set('n', 'q', ':quit<CR>') -- Just press 'q' to quit
+vim.keymap.set('x', '<', '<gv')     -- Stay in indent mode when indenting
+vim.keymap.set('x', '>', '>gv|')    -- Stay in indent mode when indenting
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y') -- Yank to system clipboard
+vim.keymap.set({ 'n', 'v' }, '<leader>yy', '"+yy') -- Yank line to system clipboard
+vim.keymap.set('n', '<leader>ff', ':Pick files<CR>') -- File picker
+vim.keymap.set('n', '<leader>fg', ':Pick grep_live<CR>') -- Live grep
+vim.keymap.set('n', '<leader>fb', ':Pick buffers<CR>')  -- Buffer picker
 
+-- LSP keymaps
+--
+-- Format document
 vim.keymap.set('n', '<leader>sf', vim.lsp.buf.format)
+-- Go to definition
 vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition)
+-- Hover for info
 vim.keymap.set('n', 'K', vim.lsp.buf.hover)
-vim.keymap.set('n', '<leader>sd', vim.diagnostic.open_float)
+-- Rename symbol
 vim.keymap.set('n', '<leader>sr', vim.lsp.buf.rename)
 
 -- Packages
 vim.pack.add({
   -- Core plugins
-  { src = "https://github.com/stevearc/oil.nvim" },
-  { src = "https://github.com/neovim/nvim-lspconfig" },
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-  { src = "https://github.com/hrsh7th/nvim-cmp" },
-  { src = "https://github.com/hrsh7th/cmp-nvim-lsp" },
-  { src = "https://github.com/github/copilot.vim" },
+  { src = "https://github.com/stevearc/oil.nvim" },        -- File explorer
+  { src = "https://github.com/neovim/nvim-lspconfig" },   -- LSP configurations
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter" }, -- Syntax highlighting
+  { src = "https://github.com/hrsh7th/nvim-cmp" },        -- Autocompletion
+  { src = "https://github.com/hrsh7th/cmp-nvim-lsp" },    -- LSP source for nvim-cmp
+  { src = "https://github.com/github/copilot.vim" },      -- GitHub Copilot
 
   -- Theme
-  { src = "https://github.com/catppuccin/nvim" },
+  { src = "https://github.com/catppuccin/nvim" },         -- Color theme
 
   -- mini.nvim
-  { src = "https://github.com/echasnovski/mini.pick" },
-  { src = "https://github.com/echasnovski/mini.icons" },
-  { src = "https://github.com/echasnovski/mini.snippets" },
-  { src = "https://github.com/echasnovski/mini.statusline" },
-  { src = "https://github.com/echasnovski/mini.sessions" },
-  { src = "https://github.com/echasnovski/mini.extra" },
+  { src = "https://github.com/echasnovski/mini.pick" },   -- Fuzzy finder
+  { src = "https://github.com/echasnovski/mini.icons" },  -- Icons
+  { src = "https://github.com/echasnovski/mini.snippets" }, -- Snippets
+  { src = "https://github.com/echasnovski/mini.statusline" }, -- Statusline
+  { src = "https://github.com/echasnovski/mini.sessions" }, -- Session management
+  { src = "https://github.com/echasnovski/mini.extra" },  -- Extra utilities
 
   -- QoL plugins
-  { src = "https://github.com/lewis6991/gitsigns.nvim" },
-  { src = "https://github.com/cohama/lexima.vim" },
+  { src = "https://github.com/lewis6991/gitsigns.nvim" }, -- Git integration
+  { src = "https://github.com/cohama/lexima.vim" },       -- Auto pairs (quotes, parentheses, etc.)
 })
 
 -- Oil
@@ -91,7 +96,10 @@ require('mini.sessions').setup({
 })
 require('mini.extra').setup()
 
+-- Symbol search
 vim.keymap.set('n', '<leader>fs', ":Pick lsp scope='document_symbol'<CR>")
+
+-- Diagnostics
 vim.keymap.set('n', '<leader>xx', function()
   MiniExtra.pickers.diagnostic(nil, {
     window = {
@@ -103,6 +111,8 @@ vim.keymap.set('n', '<leader>xx', function()
     }
   })
 end)
+
+-- Create session file
 vim.keymap.set('n', '<leader>mms', function()
   MiniSessions.write('.session.vim')
 end)
