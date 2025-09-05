@@ -64,7 +64,7 @@ export DENO_INSTALL="/home/jonah/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
 # ASDF version manager
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+export PATH="$PATH:${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
@@ -74,11 +74,11 @@ source ~/.rvm/scripts/rvm
 GPG_TTY=$(tty)
 export GPG_TTY
 
-# Turso
-export PATH="$PATH:/home/jonah/.turso"
-
-# PWD
-export PATH="$PATH:/home/jonah/Dev/pwd/.build"
-
 # P42
 export P42_LIB="/usr/local/lib/libykcs11.so"
+
+export PATH="$PATH:/home/jonah/.turso"
+export PATH="$PATH:/home/jonah/Dev/pwd/.build"
+export PATH="$PATH:/home/jonah/.ebcli-virtual-env/executables"
+export PATH="$PATH:/home/jonah/.local/share/bob/nvim-bin"
+export PATH="$PATH:/home/jonah/Dev/w/scripts"
